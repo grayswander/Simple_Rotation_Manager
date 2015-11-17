@@ -19,4 +19,6 @@
     <string name="write_settings_permission_thanks">Thank you for granting permission.\n
      Please make sure you checked the \"Don\'t ask me again\" checkbox, otherwise the servise will not be functional</string>
     <string name="write_settings_permission_scold">Without permission to change rotation settings, the service will not be functional.</string>
+    <string name="settings_facebookHackEnabled_title">Enable Facebook hack</string>
+    <string name="settings_facebookHackEnabled_summary">When enabled, full screen activities, such as watching video, will have rotation enabled, disregarding of app setting.</string>
 </resources>

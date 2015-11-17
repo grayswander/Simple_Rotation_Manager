@@ -14,4 +14,10 @@
         android:title="@string/settings_default_rotation_title"
         android:summary="@string/settings_default_rotation_summary"
         android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="facebookHackEnabled"
+        android:title="@string/settings_facebookHackEnabled_title"
+        android:summary="@string/settings_facebookHackEnabled_summary"
+        android:defaultValue="true" />
 </PreferenceScreen>

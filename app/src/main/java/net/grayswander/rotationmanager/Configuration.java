@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by alexey on 11/10/15.
  */
@@ -22,10 +25,13 @@ public class Configuration implements SharedPreferences.OnSharedPreferenceChange
 
     private boolean defaultRotationSetting = false;
 
+    private Set<String> fullScreenWatcherList;
+
 
     public Configuration(Context context) {
         this.context = context;
 
+        this.fullScreenWatcherList = new HashSet<>();
         this.generalConfiguration = PreferenceManager.getDefaultSharedPreferences(this.context);
         this.rotationConfiguration = this.context.getSharedPreferences(ROTATION_CONFIGURATION, Context.MODE_PRIVATE);
         this.generalConfiguration.registerOnSharedPreferenceChangeListener(this);
@@ -70,6 +76,11 @@ public class Configuration implements SharedPreferences.OnSharedPreferenceChange
         this.showNotifications = this.generalConfiguration.getBoolean("showNotifications", true);
         this.showDebugNotifications = this.generalConfiguration.getBoolean("showDebugNotifications", false);
         this.defaultRotationSetting = this.generalConfiguration.getBoolean("defaultRotationSetting", false);
+
+        if(this.generalConfiguration.getBoolean("facebookHackEnabled", true)) {
+            this.fullScreenWatcherList.add("com.facebook.katana");
+        }
+
         Log.d("RotationManager", "Loaded configuration");
     }
 
@@ -100,5 +111,9 @@ public class Configuration implements SharedPreferences.OnSharedPreferenceChange
 
     public void setRotationSetting(String package_name, boolean enabled) {
         this.rotationConfiguration.edit().putBoolean(package_name, enabled).apply();
+    }
+
+    public boolean isForFullscreenWatcher(String package_name) {
+        return this.fullScreenWatcherList.contains(package_name);
     }
 }

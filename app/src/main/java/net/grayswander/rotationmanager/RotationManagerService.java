@@ -5,10 +5,12 @@ import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -27,6 +29,7 @@ public class RotationManagerService extends AccessibilityService {
     Context context;
     Configuration configuration;
     Resources resources;
+    boolean appStartedFullScreen = false;
 
     @Override
     protected void onServiceConnected() {
@@ -49,6 +52,7 @@ public class RotationManagerService extends AccessibilityService {
 
         configuration = new Configuration(this.context);
         this.resources = context.getResources();
+
     }
 
     @Override
@@ -82,7 +86,7 @@ public class RotationManagerService extends AccessibilityService {
                     class_name
             );
 
-//            Log.d("Service", "Package: " + componentName.getPackageName() + " Class: " + componentName.getClassName());
+            Log.d("Service", "Package: " + componentName.getPackageName() + " Class: " + componentName.getClassName());
 
             ActivityInfo activityInfo = tryGetActivity(componentName);
             boolean isActivity = activityInfo != null;
@@ -105,9 +109,26 @@ public class RotationManagerService extends AccessibilityService {
             boolean is_rotation_enabled = this.getAutoOrientationEnabled();
 
             debug("Rotation: " + is_rotation_enabled);
-            if(is_rotation_enabled != this.lastSetRotation) {
-                debug("Setting rotation " + is_rotation_enabled + " for " + this.currentPackage);
-                this.configuration.setRotationSetting(this.currentPackage, is_rotation_enabled);
+            if(!appStartedFullScreen) {
+                Log.d("Service", "Saving rotation settings, as fullscreen hack is inactive");
+                if (is_rotation_enabled != this.lastSetRotation) {
+                    debug("Setting rotation " + is_rotation_enabled + " for " + this.currentPackage);
+                    this.configuration.setRotationSetting(this.currentPackage, is_rotation_enabled);
+                }
+            }
+            else {
+                Log.d("Service", "Not saving rotation settings, as fullscreen hack is active");
+            }
+
+            this.appStartedFullScreen = false;
+
+            if(this.configuration.isForFullscreenWatcher(package_name)) {
+                this.startFullscreenWatcher();
+            }
+            else {
+                if(this.configuration.isForFullscreenWatcher(this.currentPackage)) {
+                    this.stopFullscreenWatcher();
+                }
             }
 
             this.currentPackage = package_name;
@@ -193,5 +214,33 @@ public class RotationManagerService extends AccessibilityService {
 //            toast(message);
             Log.d("RotationManager", message);
         }
+    }
+
+    private void startFullscreenWatcher() {
+        Intent startIntent = new Intent(this, FullscreenWatcher.class);
+        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startIntent);
+    }
+
+    private void stopFullscreenWatcher() {
+        Intent stopIntent = new Intent(this, FullscreenWatcher.class);
+        stopIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        stopIntent.putExtra("stop", true);
+        startActivity(stopIntent);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        if(intent.getBooleanExtra("startedFullScreen", false)) {
+            Log.d("Service", "Received startedFullScreen event");
+            this.appStartedFullScreen = true;
+        }
+        else if(intent.getBooleanExtra("stoppedFullScreen", false)) {
+            Log.d("Service", "Received stoppedFullScreen event");
+            this.appStartedFullScreen = false;
+        }
+
+        return START_STICKY;
     }
 }
