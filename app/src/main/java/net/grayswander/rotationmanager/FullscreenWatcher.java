@@ -17,9 +17,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-/**
- * Created by alexey on 11/17/15.
- */
 public class FullscreenWatcher extends Activity implements OnSystemUiVisibilityChangeListener{
 
     Context context;
@@ -70,11 +67,11 @@ public class FullscreenWatcher extends Activity implements OnSystemUiVisibilityC
         super.onDestroy();
     }
 
-    @Override
-    protected void onStop() {
-        Log.d("FullscreenWatcher", "Stopping");
-        super.onStop();
-    }
+//    @Override
+//    protected void onStop() {
+//        Log.d("FullscreenWatcher", "Stopping");
+//        super.onStop();
+//    }
 
     @Override
     protected void onNewIntent(Intent intent) {

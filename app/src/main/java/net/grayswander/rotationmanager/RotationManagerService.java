@@ -238,7 +238,7 @@ public class RotationManagerService extends AccessibilityService {
         }
         else if(intent.getBooleanExtra("stoppedFullScreen", false)) {
             Log.d("Service", "Received stoppedFullScreen event");
-            this.appStartedFullScreen = false;
+//            this.appStartedFullScreen = false;
         }
 
         return START_STICKY;

@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Simple Rotation Manager</string>
-    <string name="accessibility_service_description">Enabling this service will make screen rotation settings to be remembered for each individual application.\n
-    NOTE: This service requires permission to change rotation settings.\n
-    If using Android 6 and later, please go to Settings and grant this permission, when requested.\n
-    Make sure to check the \"Don\'t ask me again\" checkbox, otherwise the service will not be fully functional.</string>
+    <string name="accessibility_service_description">Enabling this service will make screen rotation settings to be remembered for each individual application.\n\nNOTE: This service requires permission to change rotation settings.\n\nIf using Android 6 and later, please go to Settings and grant this permission, when requested.\nMake sure to check the \"Don\'t ask me again\" checkbox, otherwise the service will not be fully functional.</string>
     <string name="service_label">Screen rotation manager</string>
     <string name="toast_rotation_enabled">Screen rotation enabled</string>
     <string name="toast_rotation_disabled">Screen rotation disabled</string>
@@ -13,12 +10,9 @@
     <string name="settings_enable_notifications_summary">Notify when auto-rotation is enabled or disabled by service</string>
     <string name="settings_default_rotation_title">Rotation enabled by default</string>
     <string name="settings_default_rotation_summary">When checked, screen auto-rotation will be enabled for new applications</string>
-    <string name="write_settings_permission_denied_message">Simple Rotation Manager is missing permission to change screen rotation settings.\n
-    Go to Settings->Accessibility->Screen rotation manager->Settings and grant this permission in a pop-up window.\n
-    Please make sure you check the "Don't ask me again" checkbox, otherwise the servise will not be functional.</string>
-    <string name="write_settings_permission_thanks">Thank you for granting permission.\n
-     Please make sure you checked the \"Don\'t ask me again\" checkbox, otherwise the servise will not be functional</string>
+    <string name="write_settings_permission_denied_message">Simple Rotation Manager is missing permission to change screen rotation settings.\nGo to Settings->Accessibility->Screen rotation manager->Settings and grant this permission in a pop-up window.\nPlease make sure you check the "Don't ask me again" checkbox, otherwise the servise will not be functional.</string>
+    <string name="write_settings_permission_thanks">Thank you for granting permission.\nPlease make sure you checked the \"Don\'t ask me again\" checkbox, otherwise the servise will not be functional</string>
     <string name="write_settings_permission_scold">Without permission to change rotation settings, the service will not be functional.</string>
     <string name="settings_facebookHackEnabled_title">Enable Facebook hack</string>
-    <string name="settings_facebookHackEnabled_summary">When enabled, full screen activities, such as watching video, will have rotation enabled, disregarding of app setting.</string>
+    <string name="settings_fullscreen_hack_summary">When enabled, full screen activities, such as watching video, will have rotation enabled, disregarding of app setting.\n\nNOTE:Once application enters fullscreen, it\'s rotation setting will not be saved upon exit!</string>
 </resources>

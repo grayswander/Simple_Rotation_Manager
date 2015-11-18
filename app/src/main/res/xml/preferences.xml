@@ -18,6 +18,6 @@
     <CheckBoxPreference
         android:key="facebookHackEnabled"
         android:title="@string/settings_facebookHackEnabled_title"
-        android:summary="@string/settings_facebookHackEnabled_summary"
+        android:summary="@string/settings_fullscreen_hack_summary"
         android:defaultValue="true" />
 </PreferenceScreen>
