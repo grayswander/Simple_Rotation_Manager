@@ -1,4 +1,20 @@
 package net.grayswander.rotationmanager;
+/**
+ * This file is part of Simple Rotation Manager.
+ *
+ * Simple Rotation Manager is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Simple Rotation Manager is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -10,9 +26,7 @@ import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-/**
- * Created by alexey on 11/11/15.
- */
+
 public class SettingsActivity extends PreferenceActivity implements OnRequestPermissionsResultCallback {
     private static final int WRITE_SETTINGS_PERMISSION_REQUEST = 1;
 
